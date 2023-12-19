@@ -1,0 +1,19 @@
+[
+  {
+    "table": "blog",
+    "rows": [
+      {
+        "id": 1,
+        "title": "Hello World",
+        "slug": "1-hello-world",
+        "createdAt": 1702980186
+      },
+      {
+        "id": 2,
+        "title": "Second post",
+        "slug": "2-second-post",
+        "createdAt": 1703152847
+      }
+    ]
+  }
+]
