@@ -1,8 +1,8 @@
 # WIP: Banger-Simple
 
-## Simple full-stack framework with PHP, JSON-DB and Van.JS. It gets you covered from database to SSG without any Node.js, React or remote database provider. BANG! 🎉
+## Simple full-stack framework with PHP, built from scratch JSON-DB and Van.JS. It gets you covered from database to SSG without any Node.js, React or remote database provider. BANG! 🎉
 
-- **💽 JSON Database: Every data you need is packed into BCrypt password-protected .zip file containing your data in JSON format. Literally No SQL is in here. Table schema check and seeding is available!**
+- **💽 JSON Database: Every data you need is packed into AES256 password-protected .zip file containing your data in JSON format. Literally No SQL is in here. Table schema check and seeding is available!**
 
 - **🧰 REST Friendly: Banger-Simple provides CRUD functions for accessing your JSON Database which you can use in /api directory.**
 
@@ -16,7 +16,7 @@
 
 ## Configuration and basic usage
 
-- Edit `config.json` to change your app metadata.
+- Edit `config.json` to change your default app metadata.
 
 ## But why?
 

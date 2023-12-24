@@ -1,0 +1,6 @@
+config.json
+dev/
+prod/
+index.html
+main.js
+dev-dir/*

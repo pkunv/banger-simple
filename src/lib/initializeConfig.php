@@ -6,6 +6,7 @@ function initializeConfig($path)
     'appName' => 'My App',
     'appDescription' => 'My App Description',
     'appKeywords' => 'my,app,keywords',
+    'appAuthor' => 'banger-simple',
     'appLang' => 'en',
   );
 

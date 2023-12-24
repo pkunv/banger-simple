@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/validateSchema.php');
-require_once(__DIR__ . '/createDb.php');
 
 /**
  * @param string $schemaPath
@@ -9,16 +8,8 @@ require_once(__DIR__ . '/createDb.php');
  * @param string $password
  * @return array
  */
-function initializeDb($schemaPath, $seedPath, $dbPath, $password)
+function createDb($schemaPath, $seedPath, $dbPath, $password)
 {
-  // for initializing dev environment, we use the boilerplate schema and seed files
-  $boilerplateSchemaPath = PROJECT_ROOT_PATH . '/src/dev-dir-structure-helper/db/schema.json';
-  $boilerplateSeedPath = PROJECT_ROOT_PATH . '/src/dev-dir-structure-helper/db/seed.json';
-
-  file_put_contents($schemaPath, file_get_contents($boilerplateSchemaPath));
-  file_put_contents($seedPath, file_get_contents($boilerplateSeedPath));
-
-  return createDb($schemaPath, $seedPath, $dbPath, $password);
 
   if (validateSchema($schemaPath)['success'] === false) return returnFn(false, 'Could not setup schema');
   $schema = json_decode(file_get_contents($schemaPath), true);

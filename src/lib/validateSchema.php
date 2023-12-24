@@ -5,7 +5,7 @@ require_once(__DIR__ . '/returnFn.php');
  * @param string $schemaPath
  * @return array
  */
-function setupSchema($schemaPath)
+function validateSchema($schemaPath)
 {
   $supportedTypes = ["number", "string", "datetime", "boolean"];
 
