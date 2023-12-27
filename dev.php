@@ -14,12 +14,11 @@ echo $buildResult['message'];
 
 if ($buildResult['success']) {
 
-  echo "Redirecting to web app...";
+  echo "Redirecting to the web app...";
   ob_end_clean();
   if (isset($_GET['redirect']) && ($_GET['redirect'] == 'true'))
     header("Location: index.html", true, 300);
   else
     echo file_get_contents(__DIR__ . '/index.html');
-  // optional, add later
   //include(__DIR__ . '/index.html');
 }
