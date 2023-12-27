@@ -20,5 +20,6 @@ if ($buildResult['success']) {
     header("Location: index.html", true, 300);
   else
     echo file_get_contents(__DIR__ . '/index.html');
+  // optional, add later
   //include(__DIR__ . '/index.html');
 }
