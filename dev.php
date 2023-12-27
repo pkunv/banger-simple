@@ -10,11 +10,12 @@ $buildResult = buildDev();
 
 ob_start();
 
+
 echo $buildResult['message'];
 
 if ($buildResult['success']) {
 
-  echo "Redirecting to your web app...";
+  echo "Redirecting to the web app...";
   ob_end_clean();
   if (isset($_GET['redirect']) && ($_GET['redirect'] == 'true'))
     header("Location: index.html", true, 300);
