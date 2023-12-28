@@ -4,17 +4,20 @@ header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', FALSE);
 header('Pragma: no-cache');
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
 require_once(__DIR__ . '/src/inc/bootstrap.php');
 
-$buildResult = buildDev();
+try {
+  $buildResult = buildDev();
+} catch (Exception $e) {
+  echo $e->getMessage();
+}
 
 ob_start();
 
-
-echo $buildResult['message'];
-
 if ($buildResult['success']) {
-
   echo "Redirecting to the web app...";
   ob_end_clean();
   if (isset($_GET['redirect']) && ($_GET['redirect'] == 'true'))

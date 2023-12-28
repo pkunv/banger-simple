@@ -35,7 +35,4 @@ function initializeDev()
   );
 
   header("Location: dev.php", true);
-  sleep(0.5);
-  echo $configInitResult['message'];
-  echo $dbInitResult['message'];
 }

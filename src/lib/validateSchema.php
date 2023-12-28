@@ -33,7 +33,7 @@ function validateSchema($schemaPath)
   }
 
   $schemaFile = fopen($schemaPath, 'w');
-  fwrite($schemaFile, json_encode($schema));
+  fwrite($schemaFile, json_encode($schema, JSON_PRETTY_PRINT));
   fclose($schemaFile);
 
   return returnFn(true, 'Schema file successfully initialized');

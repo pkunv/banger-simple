@@ -1,0 +1,6 @@
+Containing what could be abstracted
+
+Initializing:
+- 
+
+Dev building process:
