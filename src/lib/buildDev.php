@@ -7,25 +7,50 @@
  */
 function buildDev()
 {
-  $htmlTemplate = file_get_contents(PROJECT_ROOT_PATH . '/src/lib/main.template.html');
   $config = json_decode(file_get_contents(PROJECT_ROOT_PATH . '/config.json'), true);
-  $randomString = random_bytes(3);
+  if ($config === null) return returnFn(false, 'Config file not found');
 
-  $mainScriptFilename = "main.js";
-  $mainPageFilename = "index.html";
+  $mainTemplate = file_get_contents(PROJECT_ROOT_PATH . '/src/lib/main.template.html');
+  if ($mainTemplate === false) return returnFn(false, 'Main template not found in /src directory');
 
-  $mainScriptSrcPath = PROJECT_ROOT_PATH . '/dev/app/page.js';
-  $mainScriptDevPath = PROJECT_ROOT_PATH . '/' . $mainScriptFilename;
-  $mainPageDevPath = PROJECT_ROOT_PATH . '/' . $mainPageFilename;
+  $randomString = bin2hex(random_bytes(3));
 
-  // create main page with default config.json metadata values
-  $mainPage = str_replace(["%APP_LANG%", "%APP_NAME%", "%APP_DESCRIPTION%", "%APP_AUTHOR%", "%APP_VERSION%", "%APP_MAIN_SCRIPT%"], [$config["appLang"], $config["appName"], $config["appDescription"], $config["appKeywords"], $config["appLang"], $mainScriptFilename . "?no_cache=" . bin2hex($randomString)], $htmlTemplate);
+  $configFields = [
+    "%APP_LANG%",
+    "%APP_NAME%",
+    "%APP_DESCRIPTION%",
+    "%APP_AUTHOR%",
+    "%APP_KEYWORDS%",
+  ];
 
-  $mainScript = str_replace('api', './dev/api', file_get_contents($mainScriptSrcPath));
+  $configValues = [
+    $config["appLang"],
+    $config["appName"],
+    $config["appDescription"],
+    $config["appAuthor"],
+    $config["appKeywords"],
+  ];
+
+  $mainScript = [
+    "content" => str_replace('api', './dev/api', file_get_contents(PROJECT_ROOT_PATH . '/dev/app/page.js')),
+    "fileName" => "main.js?no_cache=" . $randomString, // apply to html without cache
+    "targetDevPath" => "./dev-dir/main.js"
+  ];
+
+  $mainPage = [
+    // setting up main template with config metadata
+    "content" => str_replace(
+      [...$configFields, "%APP_MAIN_SCRIPT%"],
+      [...$configValues, $mainScript['targetDevPath']],
+      $mainTemplate
+    ),
+    "fileName" => "index.html",
+    "targetDevPath" => PROJECT_ROOT_PATH . "/index.html"
+  ];
 
   // put web app in root directory
-  file_put_contents($mainPageDevPath, $mainPage);
-  file_put_contents($mainScriptDevPath, $mainScript);
+  file_put_contents($mainPage["targetDevPath"], $mainPage["content"]);
+  file_put_contents($mainScript["targetDevPath"], $mainScript["content"]);
 
   return returnFn(true, 'Dev environment built');
 }
