@@ -1,4 +1,5 @@
 <?php
+require_once PROJECT_ROOT_PATH  . "/src/lib/build/scriptInterpreter.php";
 
 /**
  * Build dev environment
@@ -32,9 +33,9 @@ function buildDev()
   ];
 
   $mainScript = [
-    "content" => str_replace('api', './dev/api', file_get_contents(PROJECT_ROOT_PATH . '/dev/app/page.js')),
+    "content" => interpreteScript(file_get_contents(PROJECT_ROOT_PATH . '/dev/app/page.js'), 0),
     "fileName" => "main.js?no_cache=" . $randomString, // apply to html without cache
-    "targetDevPath" => "./dev-dir/main.js"
+    "targetDevPath" => "./main.js"
   ];
 
   $mainPage = [

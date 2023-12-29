@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/validateSchema.php');
+require_once(__DIR__ . '/validate/validateSchema.php');
 
 /**
  * @param string $schemaPath

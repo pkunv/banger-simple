@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../inc/bootstrap.php';
+require_once __DIR__ . '/../../inc/bootstrap.php';
 
 function initializeDev()
 {
@@ -16,9 +16,13 @@ function initializeDev()
 
   $password = 'password';
 
-  if (!is_dir($dbPath)) mkdir($dbPath, 0777, true);
-  if (!is_dir($appPath)) mkdir($appPath, 0777, true);
-  if (!is_dir($apiPath)) mkdir($apiPath, 0777, true);
+  try {
+    if (!is_dir($dbPath)) if (!mkdir($dbPath, 0777, true)) throw new Exception('Failed to create dev/db directory.');
+    if (!is_dir($appPath)) if (!mkdir($appPath, 0777, true)) throw new Exception('Failed to create dev/app directory.');
+    if (!is_dir($apiPath)) if (!mkdir($apiPath, 0777, true)) throw new Exception('Failed to create dev/api directory.');
+  } catch (Exception $e) {
+    return returnFn(false, 'Failed to initialize environment structure. Please check permissions to read/write operations to the project root directory.');
+  }
 
   $configInitResult = initializeConfig($configPath);
   $dbInitResult = initializeDb($schemaPath, $seedPath, $dataPath, $password);
@@ -34,5 +38,5 @@ function initializeDev()
     file_get_contents(PROJECT_ROOT_PATH . '/src/dev-dir-structure-helper/api/index.php')
   );
 
-  header("Location: dev.php", true);
+  return returnFn(true, 'Initialized dev folders successfully.');
 }

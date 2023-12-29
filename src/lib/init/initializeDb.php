@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/validateSchema.php');
-require_once(__DIR__ . '/createDb.php');
+require_once(__DIR__ . '/../validate/validateSchema.php');
+require_once(__DIR__ . '/../createDb.php');
 
 /**
  * @param string $schemaPath

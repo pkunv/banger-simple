@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/returnFn.php');
+require_once(__DIR__ . '/../returnFn.php');
 
 /**
  * @param string $schemaPath
